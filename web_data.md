@@ -120,3 +120,52 @@ nyc_water
     ##  9 1987  7342476              1447                      197                     
     ## 10 1988  7353719              1484                      202                     
     ## # … with 32 more rows
+
+## BRFSS
+
+Same process, different data
+
+``` r
+brfss_2010 = 
+  GET("https://chronicdata.cdc.gov/resource/acme-vg9e.csv",
+  query = list("$limit" = 5000)) %>% 
+content("parsed")
+```
+
+    ## 
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## cols(
+    ##   .default = col_character(),
+    ##   year = col_double(),
+    ##   sample_size = col_double(),
+    ##   data_value = col_double(),
+    ##   confidence_limit_low = col_double(),
+    ##   confidence_limit_high = col_double(),
+    ##   display_order = col_double(),
+    ##   locationid = col_logical()
+    ## )
+    ## ℹ Use `spec()` for the full column specifications.
+
+``` r
+brfss_2010
+```
+
+    ## # A tibble: 5,000 x 23
+    ##     year locationabbr locationdesc  class  topic  question  response sample_size
+    ##    <dbl> <chr>        <chr>         <chr>  <chr>  <chr>     <chr>          <dbl>
+    ##  1  2010 AL           AL - Mobile … Healt… Overa… How is y… Excelle…          91
+    ##  2  2010 AL           AL - Jeffers… Healt… Overa… How is y… Excelle…          94
+    ##  3  2010 AL           AL - Tuscalo… Healt… Overa… How is y… Excelle…          58
+    ##  4  2010 AL           AL - Jeffers… Healt… Overa… How is y… Very go…         148
+    ##  5  2010 AL           AL - Tuscalo… Healt… Overa… How is y… Very go…         109
+    ##  6  2010 AL           AL - Mobile … Healt… Overa… How is y… Very go…         177
+    ##  7  2010 AL           AL - Jeffers… Healt… Overa… How is y… Good             208
+    ##  8  2010 AL           AL - Mobile … Healt… Overa… How is y… Good             224
+    ##  9  2010 AL           AL - Tuscalo… Healt… Overa… How is y… Good             171
+    ## 10  2010 AL           AL - Mobile … Healt… Overa… How is y… Fair             120
+    ## # … with 4,990 more rows, and 15 more variables: data_value <dbl>,
+    ## #   confidence_limit_low <dbl>, confidence_limit_high <dbl>,
+    ## #   display_order <dbl>, data_value_unit <chr>, data_value_type <chr>,
+    ## #   data_value_footnote_symbol <chr>, data_value_footnote <chr>,
+    ## #   datasource <chr>, classid <chr>, topicid <chr>, locationid <lgl>,
+    ## #   questionid <chr>, respid <chr>, geolocation <chr>
