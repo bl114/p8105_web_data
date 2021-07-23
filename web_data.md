@@ -76,3 +76,47 @@ swm_df
     ## 7 Star Wars: Episode VII - The Force Awakens     $936.66M  138 min
     ## 8 Star Wars: Episode VIII - The Last Jedi        $620.18M  152 min
     ## 9 Star Wars: The Rise Of Skywalker               $515.20M  141 min
+
+## Get some water data
+
+This is coming from an API
+
+``` r
+nyc_water = 
+  GET("https://data.cityofnewyork.us/resource/ia2d-e54m.csv") %>% 
+  content("parsed")
+```
+
+    ## 
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## cols(
+    ##   year = col_double(),
+    ##   new_york_city_population = col_double(),
+    ##   nyc_consumption_million_gallons_per_day = col_double(),
+    ##   per_capita_gallons_per_person_per_day = col_double()
+    ## )
+
+``` r
+nyc_water = 
+  GET("https://data.cityofnewyork.us/resource/ia2d-e54m.json") %>% 
+  content("text") %>% 
+  jsonlite::fromJSON() %>% 
+  as_tibble()
+
+nyc_water
+```
+
+    ## # A tibble: 42 x 4
+    ##    year  new_york_city_popul… nyc_consumption_million_… per_capita_gallons_per_…
+    ##    <chr> <chr>                <chr>                     <chr>                   
+    ##  1 1979  7102100              1512                      213                     
+    ##  2 1980  7071639              1506                      213                     
+    ##  3 1981  7089241              1309                      185                     
+    ##  4 1982  7109105              1382                      194                     
+    ##  5 1983  7181224              1424                      198                     
+    ##  6 1984  7234514              1465                      203                     
+    ##  7 1985  7274054              1326                      182                     
+    ##  8 1986  7319246              1351                      185                     
+    ##  9 1987  7342476              1447                      197                     
+    ## 10 1988  7353719              1484                      202                     
+    ## # … with 32 more rows
